@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ki-Beispiel - Menüs</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Menü-Übersicht</h1>
+            <p>Alle verfügbaren Menüs</p>
+        </header>
+
+        <main>
+            <section class="menus-section">
+                <h2>Verfügbare Menüs</h2>
+                <div th:if="${menus.isEmpty()}">
+                    <p>Keine Menüs verfügbar.</p>
+                </div>
+                <table th:if="${!menus.isEmpty()}">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="menu : ${menus}">
+                            <td th:text="${menu.id}"></td>
+                            <td th:text="${menu.name}"></td>
+                            <td th:text="${menu.description}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="navigation-section">
+                <a href="/" class="btn btn-primary">Zurück zur Startseite</a>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Ki-Beispiel - Java Spring Boot Project</p>
+        </footer>
+    </div>
+</body>
+</html>

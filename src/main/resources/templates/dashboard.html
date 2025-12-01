@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ki-Beispiel - Meine Bestellungen</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Meine Bestellungen</h1>
+            <p>Willkommen, <span th:text="${user.username}"></span>!</p>
+        </header>
+
+        <main>
+            <section class="orders-section">
+                <h2>Bevorstehende Bestellungen</h2>
+                <div th:if="${orders.isEmpty()}">
+                    <p>Sie haben keine bevorstehenden Bestellungen.</p>
+                </div>
+                <table th:if="${!orders.isEmpty()}">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Menü</th>
+                            <th>Datum</th>
+                            <th>Ort</th>
+                            <th>Menge</th>
+                            <th>Aktionen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order : ${orders}">
+                            <td th:text="${order.id}"></td>
+                            <td th:text="${order.menu.name}"></td>
+                            <td th:text="${order.orderDate}"></td>
+                            <td th:text="${order.location}"></td>
+                            <td th:text="${order.quantity}"></td>
+                            <td>
+                                <form action="/order/cancel" method="post" style="display:inline;">
+                                    <input type="hidden" name="orderId" th:value="${order.id}">
+                                    <button type="submit" class="btn btn-danger" 
+                                            onclick="return confirm('Möchten Sie diese Bestellung wirklich stornieren?')">
+                                        Stornieren
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="navigation-section">
+                <div class="button-group">
+                    <a href="/order" class="btn btn-primary">Neue Bestellung</a>
+                    <a href="/" class="btn btn-primary">Zurück zur Startseite</a>
+                    <a href="/logout" class="btn btn-danger">Abmelden</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Ki-Beispiel - Java Spring Boot Project</p>
+        </footer>
+    </div>
+</body>
+</html>
