@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Web Controller for the GUI Frontend.
@@ -126,7 +127,7 @@ public class WebController {
         }
         
         orderService.findById(orderId).ifPresent(order -> {
-            if (order.getUser().getId().equals(loggedInUser.getId())) {
+            if (Objects.equals(order.getUser().getId(), loggedInUser.getId())) {
                 orderService.deleteById(orderId);
             }
         });
