@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ki-Beispiel - Anmelden</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Anmelden</h1>
+            <p>Bitte melden Sie sich an</p>
+        </header>
+
+        <main>
+            <section class="form-section">
+                <h2>Login</h2>
+                <div th:if="${error}" class="error-message">
+                    <p th:text="${error}"></p>
+                </div>
+                <form action="/login" method="post">
+                    <div class="form-group">
+                        <label for="username">Benutzername:</label>
+                        <input type="text" id="username" name="username" required placeholder="Benutzername">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Passwort:</label>
+                        <input type="password" id="password" name="password" required placeholder="Passwort">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Anmelden</button>
+                </form>
+                <p class="info-text">Testzugang: Benutzername <strong>user</strong>, Passwort <strong>user</strong></p>
+            </section>
+
+            <section class="navigation-section">
+                <a href="/" class="btn btn-primary">Zurück zur Startseite</a>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Ki-Beispiel - Java Spring Boot Project</p>
+        </footer>
+    </div>
+</body>
+</html>
