@@ -6,7 +6,7 @@ Java Spring Boot Project with REST-API, JPA and MySQL
 
 - **JDK Version**: 17
 - **Spring Boot**: 3.4.5
-- **Database**: MySQL
+- **Database**: H2 (default) or MySQL (optional)
 - **ORM**: JPA/Hibernate
 - **Frontend**: Thymeleaf with HTML/CSS/JavaScript
 
@@ -23,12 +23,42 @@ Java Spring Boot Project with REST-API, JPA and MySQL
 ### Prerequisites
 
 1. Install JDK 17
-2. Install MySQL Server
-3. Create a database named `kibeispiel` (or configure it in `application.properties`)
+2. (Optional) Install MySQL Server for production use
 
-### Configuration
+### Database Configuration
 
-Edit `src/main/resources/application.properties` to configure your MySQL connection:
+The application uses **H2 in-memory database by default**, so you can run it immediately without installing MySQL.
+
+#### Option 1: Using H2 (Default - No setup required)
+
+```bash
+# Run with H2 database (default)
+mvn spring-boot:run
+```
+
+Access H2 Console at: http://localhost:8080/h2-console
+- JDBC URL: `jdbc:h2:mem:kibeispiel`
+- Username: `sa`
+- Password: (leave empty)
+
+#### Option 2: Using MySQL (Production)
+
+1. Install and start MySQL Server
+2. Create a database named `kibeispiel` (optional - will be created automatically)
+3. Run with MySQL profile:
+
+```bash
+# Run with MySQL database
+mvn spring-boot:run -Dspring-boot.run.profiles=mysql
+```
+
+Or set environment variable:
+```bash
+export SPRING_PROFILES_ACTIVE=mysql
+mvn spring-boot:run
+```
+
+To customize MySQL connection, edit `src/main/resources/application-mysql.properties`:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/kibeispiel
@@ -42,7 +72,7 @@ spring.datasource.password=your-password
 # Build the project
 mvn clean install
 
-# Run the application
+# Run the application (with H2 by default)
 mvn spring-boot:run
 ```
 
